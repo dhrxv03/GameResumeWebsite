@@ -18,13 +18,13 @@ k.loadSprite("spritesheet", "./spritesheet.png", {
   
   k.setBackground(k.Color.fromHex("#311047"));
 
-  k.scene("game", async () => {
+  k.scene("main", async () => {
     const mapData = await (await fetch("./map.json")).json()
     const layers = mapData.layers;
 
     const map = k.make([k.sprite("map"), k.pos(0), k.scale(scaleFactors)]);
 
-    const player = k.add([
+    const player = k.make([
       k.sprite("spritesheet", { anim: "idle-down" }),
       k.area({
           shape: new k.Rect(k.vec2(0, 3), 10, 10),
@@ -52,6 +52,14 @@ k.loadSprite("spritesheet", "./spritesheet.png", {
             k.pos(boundary.x, boundary.y),
             boundary.name,
           ]);
+
+          if (boundary.name){
+            player.onCollide(boundary.name, () => {
+              player.isInDialogue = true;
+              //TODO
+            });
+          }
+
         }
       }
     }
