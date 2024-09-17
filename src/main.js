@@ -1,6 +1,6 @@
 import { scaleFactors } from "./constants.js";
 import {k} from "./kaboomCtx.js";
-import { displayDialogue } from "./utils.js";
+import { displayDialogue, setCamScale } from "./utils.js";
 
 k.loadSprite("spritesheet", "/spritesheet.png", {
     sliceX: 39,
@@ -25,7 +25,7 @@ k.loadSprite("spritesheet", "/spritesheet.png", {
 
     const map = k.add([k.sprite("map"), k.pos(0), k.scale(scaleFactors)]);
 
-    const player = k.add([
+    const player = k.make([
       k.sprite("spritesheet", { anim: "idle-down" }),
       k.area({
           shape: new k.Rect(k.vec2(0, 3), 10, 10),
@@ -78,8 +78,46 @@ k.loadSprite("spritesheet", "/spritesheet.png", {
       }
     }
 
+setCamScale(k)
+
+k.onResize(() => {
+      setCamScale(k);
+});
+
     k.onUpdate(() => {
       k.camPos(player.pos.x, player.pos.y + 100);
+    });
+
+    k.onMouseDown((mouseBtn) => {
+      if (mouseBtn !== "left" || player.isInDialogue) return;
+      
+      const worldMousePos = k.toWorld(k.mousePos());
+      player.moveTo(worldMousePos, player.speed);
+
+      const mouseAngle = player.pos.angle(worldMousePos);
+
+      const lowerBound = 50;
+      const upperBound = 125;
+
+      if (
+        mouseAngle > lowerBound &&
+        mouseAngle < upperBound &&
+        player.curAnim() !== "walk-up"
+      ) {
+        player.play("walk-up");
+        player.direction = "up";
+        return;
+      }
+
+      if (
+        mouseAngle > -lowerBound &&
+        mouseAngle < -upperBound &&
+        player.curAnim() !== "walk-down"
+      ) {
+        player.play("walk-down");
+        player.direction = "down";
+        return;
+      }
     });
   });
 
