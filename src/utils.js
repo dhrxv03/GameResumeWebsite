@@ -9,7 +9,7 @@ export function displayDialogue(text, onDisplayEnd) {
     const intervalRef = setInterval(() => {
         if (index < text.length) {
             currentText += text[index];
-            dialogue.innerText = currentText;
+            dialogue.innerHTML = currentText;
             index++;
             return;
         }
