@@ -23,7 +23,7 @@ export const dialogueData = {
   As a self-motivated programmer, I thrive on exploring new technologies and consistently enjoy building innovative solutions. <br><br>
   I am a dedicated and hardworking student actively seeking opportunities to apply my skills. 
   My ability to quickly learn and adapt to new software allows me to work efficiently and effectively in diverse technical environments`,
-  resume: `Feel free to take a look at my <a href='https://github.com/dhrxv03' target='_blank'>resume</a>, 
+  resume: `Feel free to take a look at my <a href='https://github.com/dhrxv03/GameResumeWebsite/blob/main/Dhruv%20Shah%20CV.pdf' target='_blank'>resume</a>, 
   and you're welcome to connect with me on <a href='https://www.linkedin.com/in/dhruvshah03/' target='_blank'>LinkedIn</a>. 
   I look forward to the opportunity to connect!`,
   pool: `Swimming has been a beloved hobby of mine since childhood. 
